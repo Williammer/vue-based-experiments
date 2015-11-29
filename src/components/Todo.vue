@@ -54,14 +54,28 @@
 </style>
 
 <script>
+import Vue from 'vue'
+import Revue from 'revue'
+import { createStore } from 'redux'
+import reducer from '../reducers/index'
+
+let store = createStore(reducer);
+
+Vue.use(Revue, { store });
+
 export default {
-  name: "Todo-app",
+  name: "TodoApp",
 
   data() {
     return {
       newItem: '',
-      todos: []
+      todos: this.$revue.getState().todos
+      // todos: []
     }
+  },
+
+  ready () {
+    this.$subscribe('todos')
   },
 
   methods: {
@@ -69,17 +83,19 @@ export default {
       let trimmedTodo = this.newItem.trim();
 
       if(trimmedTodo){
-        this.todos.push({
+        /*this.todos.push({
           todo: trimmedTodo,
           checked: false
-        });
+        });*/
+        this.$revue.dispatch({type: 'ADD_TODO', todo: trimmedTodo})
         this.newItem = '';
       }
     },
     removeItem(idx) {
       let todoLen = this.todos.length;
       if(idx >= 0 && idx < todoLen){
-        this.todos.splice(idx, 1);
+        // this.todos.splice(idx, 1);
+        this.$revue.dispatch({type: 'REMOVE_TODO', idx});
       }
     }
   }
