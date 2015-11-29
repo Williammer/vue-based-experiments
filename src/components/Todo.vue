@@ -1,6 +1,6 @@
 <template>
   <div class="col-sm-6 col-sm-offset-3">
-    <h1>Todo app</h1>
+    <h1 class="todo-header">Todo List</h1>
     <input
         type="text"
         class="form-control"
@@ -21,6 +21,10 @@
 </template>
 
 <style lang="stylus">
+.todo-header
+  text-align center
+  margin-bottom 20px
+
 .todo-container
   margin-top 10px
 
