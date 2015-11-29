@@ -12,13 +12,14 @@
 
     <div class="todo-container" v-if="todos">
       <ul class="todo-items" v-for="(idx, item) in todos">
-        <input type="checkbox" class="todo-checkbox" v-model="item.checked" />
+        <input type="checkbox" class="todo-checkbox" @click="toggleItem(idx)" />
         <li class="todo-content" :class="{isChecked: item.checked}">{{item.todo}}</li>
         <button class="btn-removeItem" @click="removeItem(idx)">x</button>
       </ul>
     </div>
   </div>
 </template>
+
 
 <style lang="stylus">
 .todo-header
@@ -57,6 +58,7 @@
     padding 0px 2px
 </style>
 
+
 <script>
 import Vue from 'vue'
 import Revue from 'revue'
@@ -91,9 +93,13 @@ export default {
           todo: trimmedTodo,
           checked: false
         });*/
+        // [redux] The only way to mutate the state is to emit an action, an object describing what happened.
         this.$revue.dispatch({type: 'ADD_TODO', todo: trimmedTodo})
         this.newItem = '';
       }
+    },
+    toggleItem(idx) {
+      this.$revue.dispatch({type: 'TOGGLE_ITEM', idx});
     },
     removeItem(idx) {
       let todoLen = this.todos.length;
