@@ -64,6 +64,7 @@ import Vue from 'vue'
 import Revue from 'revue'
 import { createStore } from 'redux'
 import reducer from '../reducers/index'
+import * as todoActions from '../actions/todos'
 
 let store = createStore(reducer);
 
@@ -94,18 +95,18 @@ export default {
           checked: false
         });*/
         // [redux] The only way to mutate the state is to emit an action, an object describing what happened.
-        this.$revue.dispatch({type: 'ADD_TODO', todo: trimmedTodo})
+        this.$revue.dispatch(todoActions.addTodo(trimmedTodo))
         this.newItem = '';
       }
     },
     toggleItem(idx) {
-      this.$revue.dispatch({type: 'TOGGLE_ITEM', idx});
+      this.$revue.dispatch(todoActions.toggleTodo(idx));
     },
     removeItem(idx) {
       let todoLen = this.todos.length;
       if(idx >= 0 && idx < todoLen){
         // this.todos.splice(idx, 1);
-        this.$revue.dispatch({type: 'REMOVE_TODO', idx});
+        this.$revue.dispatch(todoActions.removeTodo(idx));
       }
     }
   }

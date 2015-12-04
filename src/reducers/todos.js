@@ -4,7 +4,7 @@ export default function todos(state = [], action) {
     case 'ADD_TODO':
       return state.concat([{ todo: action.todo, checked: false }])
     
-    case 'TOGGLE_ITEM':
+    case 'TOGGLE_TODO':
       state[action.idx].checked = !state[action.idx].checked;
       return state;
 
