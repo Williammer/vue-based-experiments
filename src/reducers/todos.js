@@ -6,12 +6,20 @@ export default function todos(state = [], action) {
       return state.concat([{ todo: action.todo, checked: false }])
     
     case 'TOGGLE_TODO':
-      state[action.idx].checked = !state[action.idx].checked;
-      return state;
+      return [ 
+        ...state.slice(0, action.idx),
+        {
+          todo: state[action.idx].todo,
+          checked: !state[action.idx].checked
+        },
+        ...state.slice(action.idx + 1)
+      ];
 
     case 'REMOVE_TODO':
-      state.splice(action.idx, 1);
-      return state;
+      return [ 
+        ...state.slice(0, action.idx),
+        ...state.slice(action.idx + 1)
+      ];
     
     default:
       return state;
