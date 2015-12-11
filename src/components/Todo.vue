@@ -77,7 +77,6 @@ export default {
     return {
       newItem: '',
       todos: this.$revue.getState().todos
-      // todos: []
     }
   },
 
@@ -90,10 +89,6 @@ export default {
       let trimmedTodo = this.newItem.trim();
 
       if(trimmedTodo){
-        /*this.todos.push({
-          todo: trimmedTodo,
-          checked: false
-        });*/
         // [redux] The only way to mutate the state is to emit an action, an object describing what happened.
         this.$revue.dispatch(todoActions.addTodo(trimmedTodo))
         this.newItem = '';
@@ -105,7 +100,6 @@ export default {
     removeItem(idx) {
       let todoLen = this.todos.length;
       if(idx >= 0 && idx < todoLen){
-        // this.todos.splice(idx, 1);
         this.$revue.dispatch(todoActions.removeTodo(idx));
       }
     }
