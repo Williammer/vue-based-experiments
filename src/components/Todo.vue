@@ -12,7 +12,7 @@
 
     <div class="todo-container" v-if="todos">
       <ul class="todo-items" v-for="(idx, item) in todos">
-        <input type="checkbox" class="todo-checkbox" @click="toggleItem(idx)" />
+        <input type="checkbox" class="todo-checkbox" @click="toggleItem(idx)" v-model="item.checked" />
         <li class="todo-content" :class="{isChecked: item.checked}">{{item.todo}}</li>
         <button class="btn-removeItem" @click="removeItem(idx)">x</button>
       </ul>
