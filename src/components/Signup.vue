@@ -44,7 +44,7 @@ export default {
 
     submit() {
 
-      var credentials = {
+      const credentials = {
         username: this.credentials.username,
         password: this.credentials.password
       }

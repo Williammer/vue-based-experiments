@@ -95,7 +95,7 @@ export default {
       }
     },
     addItem() {
-      let trimmedTodo = this.newItem.trim();
+      const trimmedTodo = this.newItem.trim();
 
       if(trimmedTodo){
         // [redux] The only way to mutate the state is to emit an action, an object describing what happened.
@@ -107,7 +107,7 @@ export default {
       this.$revue.dispatch(todoActions.toggleTodo(idx));
     },
     removeItem(idx) {
-      let todoLen = this.todos.length;
+      const todoLen = this.todos.length;
       if(idx >= 0 && idx < todoLen){
         this.$revue.dispatch(todoActions.removeTodo(idx));
       }
