@@ -70,6 +70,7 @@ let store = createStore(reducer);
 
 Vue.use(Revue, { store });
 
+// todos ==> array type
 export default {
   name: "TodoApp",
 
@@ -85,6 +86,14 @@ export default {
   },
 
   methods: {
+    valueInputBind(evt) {
+      const trimmedTodo = evt.target.value.trim();
+
+      if(trimmedTodo){
+        // [redux] The only way to mutate the state is to emit an action, an object describing what happened.
+        this.newItem = trimmedTodo;
+      }
+    },
     addItem() {
       let trimmedTodo = this.newItem.trim();
 
